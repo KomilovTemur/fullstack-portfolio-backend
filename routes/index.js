@@ -28,16 +28,5 @@ router.get("/socials", (req, res) => {
   });
 });
 
-router.get("/all", (req, res) => {
-  db.all(`select * from home`, (err, rows) => {
-    db.all(`select * from services`, (err, services) => {
-      db.all(`select * from portfolio`, (err, portfolio) => {
-        db.all(`select * from socials`, (err, socials) => {
-          res.json([{ rows, services, portfolio, socials }]);
-        });
-      });
-    });
-  });
-});
 
 module.exports = router;
