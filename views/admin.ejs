@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <% home.map(item => { %>
+      <form
+        class="d-flex flex-column w-50 m-auto"
+        method="post"
+        action="/admin/home"
+      >
+        <h2 class="mb-0 text-center">Home section items</h2>
+        <label class="my-2"
+          >Logo
+          <input
+            required
+            class="form-control"
+            type="text"
+            name="logo"
+            value="<%= item.logo %>"
+          />
+        </label>
+        <label>
+          Description
+          <input
+            required
+            class="form-control"
+            type="text"
+            name="description"
+            value="<%= item.description %>"
+          />
+        </label>
+        <label class="my-2">
+          Image
+          <input
+            required
+            class="form-control"
+            type="text"
+            name="image"
+            value="<%= item.image %>"
+          />
+        </label>
+        <label>
+          Full name
+          <input
+            required
+            class="form-control"
+            type="text"
+            name="fullName"
+            value="<%= item.fullName %>"
+          />
+        </label>
+        <label class="my-2">
+          Job
+          <input
+            required
+            class="form-control"
+            type="text"
+            name="job"
+            value="<%= item.job %>"
+          />
+        </label>
+
+        <button class="btn btn-success" type="submit">Update</button>
+      </form>
+      <%}); %>
+      <hr />
+      <h2 id="services" class="text-center">Services section</h2>
+      <% services.map(item => { %>
+      <form
+        class="d-flex w-50 m-auto flex-column"
+        method="post"
+        action="/admin/services/<%= item.id %>"
+      >
+        <h4 class="text-center"><%= item.title %></h4>
+        <div class="d-flex w-100">
+          <input
+            name="title"
+            type="text"
+            class="form-control me-1"
+            value="<%= item.title %>"
+          />
+          <input
+            name="image"
+            type="text"
+            class="form-control ms-1"
+            value="<%= item.image %>"
+          />
+        </div>
+        <textarea
+          name="description"
+          rows="5"
+          type="text"
+          class="form-control d-block my-2"
+        >
+<%= item.description %>
+        </textarea>
+        <button class="mb-3 btn btn-success w-100">Update</button>
+      </form>
+      <% });%>
+    </div>
+  </body>
+</html>
