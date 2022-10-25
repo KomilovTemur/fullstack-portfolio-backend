@@ -3,12 +3,6 @@ const db = new sqlite3.Database("./database/main.db");
 var express = require("express");
 var router = express.Router();
 
-// router.get("/", (req, res) => {
-//   // res.render("index");
-//   db.all(`select * from home`, (err, home) => {
-//     res.render("admin", { home });
-//   });
-// });
 router.post("/home", (req, res) => {
   const { logo, description, image, job, fullName } = req.body;
   db.run(
@@ -29,28 +23,14 @@ router.post("/services/:id", (req, res) => {
     }
   );
   res.redirect("/admin#services");
-
-  // res.json(req.body);
 });
-
-// router.get("/", (req, res) => {
-//   db.all(`select * from home`, (err, home) => {
-//     db.all(`select * from services`, (err, services) => {
-//       db.all(`select * from portfolio`, (err, portfolio) => {
-//         db.all(`select * from socials`, (err, socials) => {
-//           res.render("index");
-//         });
-//       });
-//     });
-//   });
-// });
 
 router.get("/", (req, res) => {
   db.all(`select * from home`, (err, home) => {
     db.all(`select * from services`, (err, services) => {
       db.all(`select * from portfolio`, (err, portfolio) => {
         db.all(`select * from socials`, (err, socials) => {
-          res.render("admin", { home, services, portfolio, socials });
+          res.json({ home, services, portfolio, socials });
         });
       });
     });
